@@ -1,0 +1,22 @@
+{
+  "buildCommand": "npm run build",
+  "installCommand": "npm install --legacy-peer-deps",
+  "framework": "nextjs",
+  "build": {
+    "env": {
+      "NODE_VERSION": "22.15.0"
+    }
+  },
+  "env": {
+    "NODE_VERSION": "22.15.0"
+  },
+  "git": {
+    "deploymentEnabled": {
+      "main": true,
+      "development": true
+    }
+  },
+  "github": {
+    "autoAlias": false
+  }
+}
