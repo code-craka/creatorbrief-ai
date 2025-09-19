@@ -3,32 +3,53 @@
 [![Next.js](https://img.shields.io/badge/Next.js-15.5.3-black?style=for-the-badge&logo=next.js&logoColor=white)](https://nextjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![React](https://img.shields.io/badge/React-19.1.0-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://reactjs.org/)
+[![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white)](https://supabase.com/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.0-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=for-the-badge)](http://makeapullrequest.com)
-[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg?style=for-the-badge)](https://github.com/yourusername/creatorbrief-ai/graphs/commit-activity)
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg?style=for-the-badge)](https://github.com/code-craka/creatorbrief-ai/graphs/commit-activity)
 
-> **AI-Powered Creator Campaign Brief Generator** - Generate comprehensive creator campaign briefs powered by multiple AI providers. Perfect for brands, agencies, and marketing teams to create data-driven influencer marketing campaigns.
+> **Enterprise B2B SaaS Platform** - AI-Powered Creator Campaign Brief Generator with comprehensive authentication, user management, and multi-tenant architecture. Perfect for brands, agencies, and marketing teams to create data-driven influencer marketing campaigns.
 
 ## ✨ Features
 
+### 🔐 Authentication & User Management
+- 🔑 **Comprehensive Auth System** - Email/password, Google OAuth, LinkedIn OAuth
+- 👥 **User Profiles** - Company information, roles, and preferences
+- 🛡️ **Role-Based Access Control** - Admin, Manager, Editor, Viewer roles
+- 🔒 **Row Level Security** - Multi-tenant data isolation with Supabase RLS
+- 📧 **Email Verification** - Secure account activation and password reset
+- 🔔 **Notification Preferences** - Customizable email and in-app notifications
+
+### 🤖 AI-Powered Campaign Generation
 - 🤖 **Multi-AI Provider Support** - OpenAI GPT-4, Anthropic Claude, Google Gemini 2.0
 - 📝 **Comprehensive Brief Generation** - Complete campaign briefs with all essential sections
 - 🎯 **Platform-Specific Strategies** - Instagram, TikTok, YouTube, LinkedIn, and more
 - 💰 **Budget Recommendations** - Smart budget allocation for creators and ad spend
 - 📊 **KPI Tracking** - Measurable goals and performance benchmarks
-- 🔄 **Caching & Rate Limiting** - Optimized performance and cost management
+
+### 🏢 Enterprise Features
+- 🏗️ **Multi-Tenant Architecture** - Secure data isolation for organizations
+- 👨‍💼 **Team Collaboration** - Invite team members with role-based permissions
+- 📈 **Usage Tracking** - Monitor AI requests, campaigns, and briefs
+- 💳 **Subscription Management** - Free, Pro, and Enterprise plans
+- 📋 **Audit Logging** - Comprehensive activity tracking for compliance
+- 🔄 **Version Control** - Track changes to briefs and campaigns
+
+### 🎨 User Experience
 - 📱 **Responsive Design** - Works perfectly on desktop and mobile
 - 🎨 **Modern UI** - Built with shadcn/ui and Tailwind CSS
 - 📤 **Export Options** - Copy, download, and print generated briefs
+- 🔄 **Caching & Rate Limiting** - Optimized performance and cost management
 
 ## 🚀 Quick Start
 
 ### Prerequisites
 
 - Node.js 22.15.0 or higher
-- npm or pnpm package manager
+- pnpm package manager (required - do not use npm)
+- Supabase account and project
 - API key from at least one AI provider (OpenAI, Anthropic, or Google)
 
 ### Installation
@@ -41,35 +62,48 @@
 
 2. **Install dependencies**
    ```bash
-   npm install
-   # or
    pnpm install
    ```
+   ⚠️ **Important**: This project requires pnpm. Do not use npm as it will cause dependency conflicts.
 
-3. **Set up environment variables**
+3. **Set up Supabase**
+   - Create a new project at [supabase.com](https://supabase.com)
+   - Run the database migrations:
+     ```bash
+     pnpm db:migrate
+     ```
+   - Generate TypeScript types:
+     ```bash
+     pnpm db:generate-types
+     ```
+
+4. **Set up environment variables**
    Create `.env.local` file in the root directory:
    ```env
+   # AI Providers
    AI_PROVIDER=gemini  # options: openai, anthropic, gemini
    OPENAI_API_KEY=your_openai_api_key_here
    ANTHROPIC_API_KEY=your_anthropic_api_key_here
    GOOGLE_API_KEY=your_google_api_key_here
+
+   # Supabase
+   NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
+   NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
    ```
 
-4. **Run the development server**
+5. **Run the development server**
    ```bash
-   npm run dev
-   # or
    pnpm dev
    ```
 
-5. **Open your browser**
+6. **Open your browser**
    Navigate to [http://localhost:3000](http://localhost:3000)
 
 ### Build for Production
 
 ```bash
-npm run build
-npm start
+pnpm build
+pnpm start
 ```
 
 ## 🔧 Configuration
@@ -95,20 +129,22 @@ The app supports three AI providers. Configure your preferred provider in `.env.
 ### Application Flow
 
 1. **Landing Page** - Welcome screen with feature overview
-2. **Sign In** - Demo authentication (click "Get Started")
-3. **Dashboard** - Comprehensive form with:
+2. **Authentication** - Sign up/sign in with email or social providers (Google, LinkedIn)
+3. **Email Verification** - Secure account activation
+4. **Dashboard** - Authenticated user dashboard with comprehensive form:
    - Product description (required)
    - Target audience (required)
    - Campaign goals
    - Platform selection (required)
    - Budget range
    - Campaign duration
-4. **AI Generation** - Real-time brief creation using Gemini AI
-5. **Results Page** - Tabbed interface showing:
+5. **AI Generation** - Real-time brief creation using Gemini AI
+6. **Results Page** - Tabbed interface showing:
    - Video brief ideas
    - Creator recommendations
    - Outreach templates
-6. **Export Options** - Copy, download, or print generated briefs
+7. **Profile Management** - User settings, company info, and preferences
+8. **Export Options** - Copy, download, or print generated briefs
 
 ### Key Features
 
@@ -141,28 +177,47 @@ creatorbrief-ai/
 ├── app/                    # Next.js App Router
 │   ├── api/               # API routes
 │   │   └── generate-brief/ # Brief generation endpoint
+│   ├── auth/              # Authentication pages
+│   │   ├── login/         # Sign in page
+│   │   ├── signup/        # Sign up page
+│   │   ├── forgot-password/ # Password reset
+│   │   ├── reset-password/  # New password
+│   │   └── callback/      # OAuth callback
+│   ├── dashboard/         # Protected dashboard
+│   ├── profile/           # User profile settings
 │   ├── globals.css        # Global styles
-│   ├── layout.tsx         # Root layout
-│   └── page.tsx          # Home page
+│   ├── layout.tsx         # Root layout with AuthProvider
+│   └── page.tsx          # Home page with auth redirect
 ├── components/            # React components
+│   ├── auth/             # Authentication components
+│   │   ├── AuthProvider.tsx   # Auth context provider
+│   │   ├── SignIn.tsx         # Sign in form
+│   │   ├── SignUp.tsx         # Sign up form
+│   │   └── ForgotPassword.tsx # Password reset form
+│   ├── profile/          # Profile management
+│   │   └── ProfileSettings.tsx # User settings
 │   ├── ui/               # shadcn/ui components
 │   ├── BriefGeneratorForm.tsx # Main form component
-│   ├── CreatorBriefApp.tsx    # Main app component
 │   ├── Dashboard.tsx          # Dashboard with form
 │   ├── LandingPage.tsx        # Welcome page
 │   ├── GeneratingSpinner.tsx  # Loading component
 │   ├── ResultsPage.tsx        # Results display
-│   ├── UpgradePage.tsx        # Pricing page
 │   └── BriefResultDisplay.tsx # Brief display component
 ├── lib/                  # Utility libraries
+│   ├── supabase/         # Supabase client utilities
+│   │   ├── client.ts     # Browser client
+│   │   └── server.ts     # Server client
 │   ├── ai-service.ts     # AI provider integrations
 │   └── utils.ts          # Utility functions
+├── supabase/             # Database migrations
+│   └── migrations/       # SQL migration files
+├── types/               # TypeScript type definitions
+│   ├── brief.ts         # Brief type definitions
+│   └── database.ts      # Database type definitions
 ├── workflows/            # Business logic
 │   └── generate-brief.ts # Brief generation workflow
-├── types/               # TypeScript type definitions
-│   └── brief.ts         # Type definitions
+├── middleware.ts         # Auth middleware
 └── public/              # Static assets
-    └── avatar.svg       # User avatar
 ```
 
 ## 🛠️ Development
@@ -171,33 +226,47 @@ creatorbrief-ai/
 
 ```bash
 # Development
-npm run dev           # Start development server
-npm run build         # Build for production
-npm start             # Start production server
+pnpm dev              # Start development server with Turbopack
+pnpm build            # Build for production with Turbopack
+pnpm start            # Start production server
+
+# Database
+pnpm db:migrate       # Run Supabase migrations
+pnpm db:reset         # Reset database
+pnpm db:generate-types # Generate TypeScript types from schema
 
 # Code Quality
-npm run lint          # Run ESLint
-npm run type-check    # Run TypeScript checks
+pnpm lint             # Run ESLint with Next.js config
+pnpm type-check       # Run TypeScript compilation check
+pnpm format           # Run Prettier formatting
+pnpm lint:md          # Lint markdown files
+pnpm lint:md:fix      # Auto-fix markdown issues
 ```
 
 ### Development Status
 
+- ✅ **Authentication System**: Complete with Supabase Auth
+- ✅ **Database Schema**: Comprehensive multi-tenant architecture
+- ✅ **User Management**: Profile settings and role-based access
 - ✅ **Core Features**: Complete and functional
 - ✅ **AI Integration**: Google Gemini 2.0 Flash working
 - ✅ **UI Components**: All components implemented
 - ✅ **TypeScript**: Fully typed with no errors
 - ✅ **Build**: Production build successful
 - ✅ **Responsive**: Mobile and desktop optimized
+- ✅ **Security**: Row Level Security and audit logging
 
 ### Tech Stack
 
-- **Framework**: Next.js 15.5.3 with App Router
-- **Language**: TypeScript 5.0
+- **Framework**: Next.js 15.5.3 with App Router and Turbopack
+- **Language**: TypeScript 5.0 (strict mode)
+- **Database**: Supabase (PostgreSQL) with Row Level Security
+- **Authentication**: Supabase Auth with social providers
 - **Styling**: Tailwind CSS 4.0
-- **UI Components**: shadcn/ui + Radix UI
+- **UI Components**: shadcn/ui + Radix UI primitives
 - **Icons**: Lucide React
 - **AI SDKs**: OpenAI, Anthropic, Google Generative AI
-- **Package Manager**: pnpm
+- **Package Manager**: pnpm (required)
 
 ## 🚀 Deployment
 
@@ -228,15 +297,21 @@ The app can be deployed to any platform that supports Next.js:
 - 🏗️ **Build Size**: ~147kB first load JS
 
 ### Current Implementation
+- 🔐 **Authentication**: Complete auth system with email/social login
+- 👥 **User Management**: Profile settings and role-based access
+- 🏗️ **Database**: Multi-tenant architecture with RLS policies
 - 🎯 **Landing Page**: Professional welcome screen
 - 📝 **Comprehensive Form**: Multi-step form with validation
 - 🤖 **AI Generation**: Real Gemini AI integration
 - 📊 **Results Display**: Tabbed interface with export options
-- 💰 **Upgrade Flow**: Pricing and subscription management
 - 🔄 **Error Handling**: Graceful fallbacks and user feedback
+- 📋 **Audit Logging**: Comprehensive activity tracking
 
-### Technical Stack
+### Technical Architecture
 - **Frontend**: Next.js 15, React 19, TypeScript
+- **Backend**: Supabase with PostgreSQL
+- **Authentication**: Supabase Auth with OAuth providers
+- **Database**: Row Level Security for multi-tenancy
 - **Styling**: Tailwind CSS 4.0, shadcn/ui
 - **AI**: Google Gemini 2.0 Flash Experimental
 - **Icons**: Lucide React
@@ -276,18 +351,28 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 🚀 Deployment Status
 
 ### Current Branch: Development
+- ✅ Complete authentication system with Supabase
+- ✅ Multi-tenant database architecture
+- ✅ User profile management and RBAC
 - ✅ All components implemented and working
 - ✅ AI integration with Gemini 2.0 Flash
 - ✅ TypeScript errors resolved
 - ✅ Build successful
 - ✅ Ready for production deployment
 
-### Next Steps
-1. Deploy to production environment
-2. Set up monitoring and analytics
-3. Add user authentication system
-4. Implement payment processing
-5. Add more AI providers
+### Phase 2 Implementation Complete
+1. ✅ Supabase integration and authentication
+2. ✅ Comprehensive user management system
+3. ✅ Database schema with RLS policies
+4. ✅ Role-based access control
+5. ✅ Audit logging and compliance features
+
+### Next Steps (Phase 3)
+1. Campaign and project management
+2. Creator database and matching
+3. Advanced analytics and reporting
+4. Team collaboration features
+5. Payment processing and subscriptions
 
 ---
 
