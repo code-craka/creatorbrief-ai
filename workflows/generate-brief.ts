@@ -1,5 +1,6 @@
 // workflows/generate-brief.ts
 import { AIServiceWithCache } from '@/lib/ai-service';
+import { CreatorBriefFormData, ContentIdea, ContentIdeaGenerationRequest } from '@/types/brief';
 
 const aiService = new AIServiceWithCache({
   provider: process.env.AI_PROVIDER as 'openai' | 'anthropic' | 'gemini' || 'openai',
@@ -131,6 +132,76 @@ export interface CreatorBriefOutput {
     creatorFee: string;
     adSpend: string;
   };
+  contentIdeas?: ContentIdea[];
+}
+
+/**
+ * Enhanced version that includes content ideas generation
+ */
+export async function generateCreatorBriefWithContentIdeas({
+  productDescription,
+  targetAudience,
+  campaignGoals = "Increase brand awareness and drive conversions",
+  budget = "Not specified",
+  platforms = ["Instagram", "TikTok"],
+  timeframe = "30 days",
+  userId
+}: CreatorBriefInput): Promise<CreatorBriefOutput> {
+  try {
+    // Generate the base brief
+    const baseBrief = await generateCreatorBrief({
+      productDescription,
+      targetAudience,
+      campaignGoals,
+      budget,
+      platforms,
+      timeframe,
+      userId
+    });
+
+    // Generate enhanced content ideas
+    const contentIdeaRequest: ContentIdeaGenerationRequest = {
+      brief_data: {
+        productDescription,
+        targetAudience,
+        campaignGoals,
+        budget,
+        platforms: platforms || [],
+        timeframe
+      } as CreatorBriefFormData,
+      idea_count: 5,
+      platforms: platforms || [],
+      creativity_level: 'balanced',
+      trend_integration: true
+    };
+
+    const contentIdeas = await aiService.generateContentIdeas(contentIdeaRequest);
+
+    // Combine base brief with content ideas
+    return {
+      ...baseBrief,
+      contentIdeas
+    };
+
+  } catch (error) {
+    console.error('Error generating enhanced creator brief:', error);
+
+    // Fallback to basic brief if content ideas generation fails
+    const baseBrief = await generateCreatorBrief({
+      productDescription,
+      targetAudience,
+      campaignGoals,
+      budget,
+      platforms,
+      timeframe,
+      userId
+    });
+
+    return {
+      ...baseBrief,
+      contentIdeas: []
+    };
+  }
 }
 
 export async function generateCreatorBrief({
