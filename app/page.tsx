@@ -1,5 +1,5 @@
-import CreatorBriefGenerator from '@/components/creator-brief-form';
+import CreatorBriefApp from '@/components/CreatorBriefApp';
 
 export default function Home() {
-  return <CreatorBriefGenerator />;
+  return <CreatorBriefApp />;
 }

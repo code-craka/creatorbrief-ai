@@ -82,6 +82,7 @@ export default function CreatorBriefGenerator() {
   const [error, setError] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<"form" | "result">("form");
 
+  // ... (all the handler functions like handleSubmit, resetForm, etc.)
   const handleInputChange = (
     field: keyof CreatorBriefFormData,
     value: string | string[]
@@ -114,17 +115,14 @@ export default function CreatorBriefGenerator() {
         },
         body: JSON.stringify(formData),
       });
-
       const data = await response.json();
-
       if (!data.success) {
         throw new Error(data.message || "Failed to generate brief");
       }
-
       setResult(data.data);
       setActiveTab("result");
-    } catch (err: any) {
-      setError(err.message || "An unexpected error occurred");
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : "An unexpected error occurred");
     } finally {
       setLoading(false);
     }
@@ -662,7 +660,7 @@ export default function CreatorBriefGenerator() {
         <Card>
           <CardContent className="text-center py-12">
             <p className="text-gray-500">
-              No brief generated yet. Please generate a brief first.
+              No brief generated yet. Please fill out the form to generate one.
             </p>
             <Button
               onClick={() => setActiveTab("form")}

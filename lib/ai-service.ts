@@ -34,7 +34,7 @@ export class AIService {
                 defaultModel = 'claude-3-5-sonnet-20241022';
                 break;
             case 'gemini':
-                defaultModel = 'gemini-2.5-pro';
+                defaultModel = 'gemini-2.0-flash-exp';
                 break;
             default:
                 defaultModel = 'gpt-4o';
