@@ -12,7 +12,33 @@ https://your-domain.com/api
 
 ## Authentication
 
-Currently, the API uses rate limiting based on IP address and user identification headers. No API key is required for basic usage.
+The API uses Supabase authentication with JWT tokens. Users must be authenticated to access protected endpoints.
+
+### Authentication Methods
+
+1. **Email/Password** - Traditional email and password authentication
+2. **Google OAuth** - Sign in with Google account
+3. **LinkedIn OAuth** - Sign in with LinkedIn account
+
+### Authentication Headers
+
+For authenticated requests, include the JWT token in the Authorization header:
+
+```http
+Authorization: Bearer <jwt_token>
+Content-Type: application/json
+```
+
+### Public Endpoints
+
+- `GET /` - Landing page (public)
+- `POST /auth/*` - Authentication endpoints (public)
+
+### Protected Endpoints
+
+- `POST /api/generate-brief` - Requires authentication
+- `GET /dashboard` - Requires authentication
+- `GET /profile` - Requires authentication
 
 ## Endpoints
 
@@ -24,8 +50,8 @@ Generate a comprehensive creator campaign brief using AI.
 
 **Headers:**
 ```http
+Authorization: Bearer <jwt_token>
 Content-Type: application/json
-X-User-ID: optional-user-identifier
 ```
 
 **Request Body:**
@@ -110,7 +136,8 @@ X-User-ID: optional-user-identifier
 
 ## Rate Limiting
 
-- **Limit:** 10 requests per hour per IP/user
+- **Limit:** 10 requests per hour per authenticated user
+- **Tracking:** Based on user ID from JWT token
 - **Headers:** Rate limit information is included in response headers
 - **Reset:** Rate limits reset every hour
 
@@ -119,6 +146,7 @@ X-User-ID: optional-user-identifier
 X-RateLimit-Limit: 10
 X-RateLimit-Remaining: 9
 X-RateLimit-Reset: 1642694400
+X-RateLimit-User: user_uuid
 ```
 
 ## Caching
