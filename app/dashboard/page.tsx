@@ -1,10 +1,10 @@
 'use client'
 
 import { useAuth } from '@/components/auth/AuthProvider'
-import { Dashboard } from '@/components/Dashboard'
+import Dashboard from '@/components/Dashboard'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Loader2, LogOut, User, Settings } from 'lucide-react'
+import { Loader2, LogOut, Settings } from 'lucide-react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 
