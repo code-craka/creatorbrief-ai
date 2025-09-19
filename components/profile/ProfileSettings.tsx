@@ -1,5 +1,6 @@
 'use client'
 
+import React from 'react'
 import { useState, useEffect } from 'react'
 import { useAuth } from '@/components/auth/AuthProvider'
 import { Button } from '@/components/ui/button'
@@ -40,10 +41,10 @@ export function ProfileSettings() {
         company_name: profile.company_name || '',
         role: profile.role,
       })
-      setNotificationPrefs({
-        ...notificationPrefs,
+      setNotificationPrefs(prev => ({
+        ...prev,
         ...profile.notification_preferences,
-      })
+      }))
     }
   }, [profile])
 

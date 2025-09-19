@@ -166,7 +166,7 @@ export async function generateCreatorBrief({
       timeframe
     });
 
-    console.log('Generating creator brief...');
+    // Generating creator brief...
     
     // Call AI service with caching and rate limiting
     const response = await aiService.generateCompletionWithCache(
@@ -175,12 +175,12 @@ export async function generateCreatorBrief({
       userId
     );
 
-    console.log('Raw AI Response:', response);
+    // Raw AI Response received
 
     // Parse and validate JSON response
     const brief = parseAndValidateResponse(response);
     
-    console.log('Successfully generated creator brief');
+    // Successfully generated creator brief
     
     return brief;
   } catch (error) {

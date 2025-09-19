@@ -1,4 +1,10 @@
+import { Metadata } from 'next'
 import { ProfileSettings } from '@/components/profile/ProfileSettings'
+
+export const metadata: Metadata = {
+  title: 'Profile Settings - CreatorBrief AI',
+  description: 'Manage your CreatorBrief AI profile and preferences',
+}
 
 export default function ProfilePage() {
   return (
@@ -15,9 +21,4 @@ export default function ProfilePage() {
       </div>
     </div>
   )
-}
-
-export const metadata = {
-  title: 'Profile Settings - CreatorBrief AI',
-  description: 'Manage your CreatorBrief AI profile and preferences',
 }

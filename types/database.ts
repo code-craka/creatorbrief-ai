@@ -6,7 +6,7 @@ export interface Database {
           id: string
           company_name: string | null
           role: 'admin' | 'manager' | 'editor' | 'viewer'
-          preferences: Record<string, any>
+          preferences: Record<string, unknown>
           notification_preferences: {
             email_enabled: boolean
             sms_enabled: boolean
@@ -23,7 +23,7 @@ export interface Database {
           id: string
           company_name?: string | null
           role?: 'admin' | 'manager' | 'editor' | 'viewer'
-          preferences?: Record<string, any>
+          preferences?: Record<string, unknown>
           notification_preferences?: {
             email_enabled?: boolean
             sms_enabled?: boolean
@@ -40,7 +40,7 @@ export interface Database {
           id?: string
           company_name?: string | null
           role?: 'admin' | 'manager' | 'editor' | 'viewer'
-          preferences?: Record<string, any>
+          preferences?: Record<string, unknown>
           notification_preferences?: {
             email_enabled?: boolean
             sms_enabled?: boolean
@@ -90,7 +90,7 @@ export interface Database {
           user_id: string
           title: string
           status: 'draft' | 'active' | 'paused' | 'completed'
-          objectives: Record<string, any>[]
+          objectives: Record<string, unknown>[]
           target_audience: string | null
           budget_range: string | null
           platforms: string[]
@@ -105,7 +105,7 @@ export interface Database {
           user_id: string
           title: string
           status?: 'draft' | 'active' | 'paused' | 'completed'
-          objectives?: Record<string, any>[]
+          objectives?: Record<string, unknown>[]
           target_audience?: string | null
           budget_range?: string | null
           platforms?: string[]
@@ -120,7 +120,7 @@ export interface Database {
           user_id?: string
           title?: string
           status?: 'draft' | 'active' | 'paused' | 'completed'
-          objectives?: Record<string, any>[]
+          objectives?: Record<string, unknown>[]
           target_audience?: string | null
           budget_range?: string | null
           platforms?: string[]
@@ -135,8 +135,8 @@ export interface Database {
           id: number
           campaign_id: number
           title: string
-          form_data: Record<string, any>
-          ai_output: Record<string, any> | null
+          form_data: Record<string, unknown>
+          ai_output: Record<string, unknown> | null
           status: 'draft' | 'generated' | 'approved' | 'sent'
           version: number
           created_at: string
@@ -146,8 +146,8 @@ export interface Database {
           id?: number
           campaign_id: number
           title: string
-          form_data: Record<string, any>
-          ai_output?: Record<string, any> | null
+          form_data: Record<string, unknown>
+          ai_output?: Record<string, unknown> | null
           status?: 'draft' | 'generated' | 'approved' | 'sent'
           version?: number
           created_at?: string
@@ -157,8 +157,8 @@ export interface Database {
           id?: number
           campaign_id?: number
           title?: string
-          form_data?: Record<string, any>
-          ai_output?: Record<string, any> | null
+          form_data?: Record<string, unknown>
+          ai_output?: Record<string, unknown> | null
           status?: 'draft' | 'generated' | 'approved' | 'sent'
           version?: number
           created_at?: string
@@ -176,7 +176,7 @@ export interface Database {
           concept: string | null
           cta: string | null
           duration: string | null
-          creative_details: Record<string, any>
+          creative_details: Record<string, unknown>
           tags: string[]
           created_at: string
         }
@@ -190,7 +190,7 @@ export interface Database {
           concept?: string | null
           cta?: string | null
           duration?: string | null
-          creative_details?: Record<string, any>
+          creative_details?: Record<string, unknown>
           tags?: string[]
           created_at?: string
         }
@@ -204,7 +204,7 @@ export interface Database {
           concept?: string | null
           cta?: string | null
           duration?: string | null
-          creative_details?: Record<string, any>
+          creative_details?: Record<string, unknown>
           tags?: string[]
           created_at?: string
         }
@@ -218,8 +218,8 @@ export interface Database {
           followers_count: number
           engagement_rate: number
           location: string | null
-          metrics: Record<string, any>
-          contact_info: Record<string, any>
+          metrics: Record<string, unknown>
+          contact_info: Record<string, unknown>
           sample_content: string[]
           verified: boolean
           created_at: string
@@ -233,8 +233,8 @@ export interface Database {
           followers_count?: number
           engagement_rate?: number
           location?: string | null
-          metrics?: Record<string, any>
-          contact_info?: Record<string, any>
+          metrics?: Record<string, unknown>
+          contact_info?: Record<string, unknown>
           sample_content?: string[]
           verified?: boolean
           created_at?: string
@@ -248,8 +248,8 @@ export interface Database {
           followers_count?: number
           engagement_rate?: number
           location?: string | null
-          metrics?: Record<string, any>
-          contact_info?: Record<string, any>
+          metrics?: Record<string, unknown>
+          contact_info?: Record<string, unknown>
           sample_content?: string[]
           verified?: boolean
           created_at?: string
@@ -264,7 +264,7 @@ export interface Database {
           title: string
           message: string
           read: boolean
-          metadata: Record<string, any>
+          metadata: Record<string, unknown>
           created_at: string
         }
         Insert: {
@@ -274,7 +274,7 @@ export interface Database {
           title: string
           message: string
           read?: boolean
-          metadata?: Record<string, any>
+          metadata?: Record<string, unknown>
           created_at?: string
         }
         Update: {
@@ -284,7 +284,7 @@ export interface Database {
           title?: string
           message?: string
           read?: boolean
-          metadata?: Record<string, any>
+          metadata?: Record<string, unknown>
           created_at?: string
         }
       }
